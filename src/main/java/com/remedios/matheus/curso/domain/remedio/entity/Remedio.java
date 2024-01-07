@@ -46,10 +46,4 @@ public class Remedio {
         this.laboratorio = dados.laboratorio();
         this.ativo = true;
     }
-
-    public void atualizarInformacoes(@Valid DadosAtualizarRemedioDTO dados) {
-        Optional.ofNullable(dados.nome()).ifPresent(n -> this.nome = n);
-        Optional.ofNullable(dados.via()).ifPresent(v -> this.via = v);
-        Optional.ofNullable(dados.laboratorio()).ifPresent(l -> this.laboratorio = l);
-    }
 }

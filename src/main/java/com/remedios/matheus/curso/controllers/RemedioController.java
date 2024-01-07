@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/remedios")
@@ -43,7 +44,10 @@ public class RemedioController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateById(@PathVariable @Valid Long id, @RequestBody DadosAtualizarRemedioDTO remedio) {
         Remedio remedioAtt = remedioRepository.getReferenceById(id);
-        remedioAtt.atualizarInformacoes(remedio);
+        Optional.ofNullable(remedio.nome()).ifPresent(remedioAtt::setNome);
+        Optional.ofNullable(remedio.via()).ifPresent(remedioAtt::setVia);
+        Optional.ofNullable(remedio.laboratorio()).ifPresent(remedioAtt::setLaboratorio);
+        remedioRepository.save(remedioAtt);
     }
 
     @DeleteMapping("{id}")
