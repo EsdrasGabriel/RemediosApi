@@ -11,15 +11,19 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public record DadosCadastroRemedioDTO(
-        @NotBlank
+        @NotBlank(message = "Campo nome é obrigatório")
         String nome,
-        @Enumerated
+        @NotNull(message = "Campo via é obrigatório")
+        @Enumerated()
         Via via,
-        @NotBlank
+        @NotBlank(message = "Campo lote é obrigatório")
         String lote,
-        int quantidade,
+        @NotNull(message = "Campo quantidade é obrigatório")
+        Integer quantidade,
+        @NotNull(message = "Campo validade é obrigatório")
         @Future
         LocalDate validade,
+        @NotNull(message = "Campo laboratório é obrigatório")
         @Enumerated
         Laboratorio laboratorio
 ) {
