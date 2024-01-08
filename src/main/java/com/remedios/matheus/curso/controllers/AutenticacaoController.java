@@ -2,6 +2,7 @@ package com.remedios.matheus.curso.controllers;
 
 import com.remedios.matheus.curso.domain.usuario.dto.DadosAutenticacao;
 import com.remedios.matheus.curso.domain.usuario.entity.Usuario;
+import com.remedios.matheus.curso.infra.dto.DadosTokenJWT;
 import com.remedios.matheus.curso.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class AutenticacaoController {
     public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         Authentication authenticate = manager.authenticate(token);
+        String tokenJWT = tokenService.gerarToken((Usuario) authenticate.getPrincipal());
 
-        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authenticate.getPrincipal()));
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 }
