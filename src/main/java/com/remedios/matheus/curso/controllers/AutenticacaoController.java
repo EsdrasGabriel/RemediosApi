@@ -1,7 +1,8 @@
 package com.remedios.matheus.curso.controllers;
 
 import com.remedios.matheus.curso.domain.usuario.dto.DadosAutenticacao;
-import com.remedios.matheus.curso.domain.usuario.repository.UsuarioRepository;
+import com.remedios.matheus.curso.domain.usuario.entity.Usuario;
+import com.remedios.matheus.curso.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AutenticacaoController {
     @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
     private AuthenticationManager manager;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         Authentication authenticate = manager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authenticate.getPrincipal()));
     }
 }
