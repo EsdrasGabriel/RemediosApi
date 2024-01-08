@@ -1,4 +1,4 @@
-package com.remedios.matheus.curso.exception;
+package com.remedios.matheus.curso.infra.exception;
 
 import lombok.Data;
 import lombok.Getter;

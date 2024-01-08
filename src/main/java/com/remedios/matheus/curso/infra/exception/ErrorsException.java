@@ -1,6 +1,5 @@
-package com.remedios.matheus.curso.exception;
+package com.remedios.matheus.curso.infra.exception;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
