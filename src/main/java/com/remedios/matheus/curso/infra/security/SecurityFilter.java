@@ -1,6 +1,6 @@
 package com.remedios.matheus.curso.infra.security;
 
-import com.remedios.matheus.curso.domain.usuario.repository.UsuarioRepository;
+import com.remedios.matheus.curso.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,37 +19,24 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = recuperarToken(request);
-        if (token != null && !token.isEmpty()) {
-            try {
-                String subject = tokenService.getSubject(token);
-                UserDetails byLogin = usuarioRepository.findByLogin(subject);
+        String token = this.recoverToken(request);
+        if (token != null) {
+            String login = tokenService.validateToken(token);
+            UserDetails user = userRepository.findByLogin(login);
 
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(byLogin, null, byLogin.getAuthorities());
-
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (RuntimeException e) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.getWriter().write("Token inválido ou expirado.");
-                return;
-            }
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
         filterChain.doFilter(request, response);
     }
 
-    private String recuperarToken(HttpServletRequest request) {
+    private String recoverToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
-        System.out.println(authorization);
-
-        if (authorization != null) {
-            return authorization.replace("Bearer ", "");
-        }
-
-        return null;
+        if (authorization == null) return null;
+        return authorization.replace("Bearer ", "");
     }
 }

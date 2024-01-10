@@ -1,12 +1,11 @@
 package com.remedios.matheus.curso.controllers;
 
 import aj.org.objectweb.asm.Type;
-import com.remedios.matheus.curso.domain.remedio.dto.DadosAtualizarRemedioDTO;
-import com.remedios.matheus.curso.domain.remedio.dto.DadosCadastroRemedioDTO;
-import com.remedios.matheus.curso.domain.remedio.dto.DadosListagemRemedioDTO;
-import com.remedios.matheus.curso.domain.remedio.entity.Remedio;
-import com.remedios.matheus.curso.domain.remedio.repository.RemedioRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.remedios.matheus.curso.domain.remedio.DadosAtualizarRemedioDTO;
+import com.remedios.matheus.curso.domain.remedio.DadosCadastroRemedioDTO;
+import com.remedios.matheus.curso.domain.remedio.DadosListagemRemedioDTO;
+import com.remedios.matheus.curso.domain.remedio.Remedio;
+import com.remedios.matheus.curso.repositories.RemedioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

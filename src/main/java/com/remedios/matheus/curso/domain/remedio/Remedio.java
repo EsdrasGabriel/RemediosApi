@@ -1,17 +1,11 @@
-package com.remedios.matheus.curso.domain.remedio.entity;
+package com.remedios.matheus.curso.domain.remedio;
 
-import com.remedios.matheus.curso.domain.remedio.dto.DadosAtualizarRemedioDTO;
-import com.remedios.matheus.curso.domain.remedio.dto.DadosCadastroRemedioDTO;
-import com.remedios.matheus.curso.domain.remedio.enums.Laboratorio;
-import com.remedios.matheus.curso.domain.remedio.enums.Via;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Entity
 @Table

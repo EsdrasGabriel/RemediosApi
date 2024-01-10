@@ -1,8 +1,4 @@
-package com.remedios.matheus.curso.domain.remedio.dto;
-
-import com.remedios.matheus.curso.domain.remedio.entity.Remedio;
-import com.remedios.matheus.curso.domain.remedio.enums.Laboratorio;
-import com.remedios.matheus.curso.domain.remedio.enums.Via;
+package com.remedios.matheus.curso.domain.remedio;
 
 import java.time.LocalDate;
 

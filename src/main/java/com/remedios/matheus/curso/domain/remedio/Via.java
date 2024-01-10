@@ -1,4 +1,4 @@
-package com.remedios.matheus.curso.domain.remedio.enums;
+package com.remedios.matheus.curso.domain.remedio;
 
 public enum Via {
     ORAL,

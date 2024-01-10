@@ -1,6 +1,6 @@
-package com.remedios.matheus.curso.domain.usuario.auth;
+package com.remedios.matheus.curso.services;
 
-import com.remedios.matheus.curso.domain.usuario.repository.UsuarioRepository;
+import com.remedios.matheus.curso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService implements UserDetailsService {
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findByLogin(username);
+        return userRepository.findByLogin(username);
     }
 }
